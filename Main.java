@@ -66,8 +66,6 @@ public class Main {
         env.setWhether(Whether.CALM);
         env.setTime(TimeOfDay.NIGHT);
 
-
-
         snusmumrik.ownAccessory(hat);
         mumitroll.ownAccessory(pipe);
 

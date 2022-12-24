@@ -1,10 +1,10 @@
 import creatures.Crowd;
-import creatures.Speed;
 import creatures.Troll;
+import exceptions.WrongAngleException;
 import objects.*;
 import surroundings.Environment;
 import surroundings.TimeOfDay;
-import surroundings.Whether;
+import surroundings.Weather;
 
 public class Main {
     public static void main(String[] args) {
@@ -24,8 +24,8 @@ public class Main {
         Cups cupsOfCoffee = new Cups("Чашки кофе", Size.LITTLE, "Кофе");
         Ramp ramp = new Ramp("Рампа", Size.BIG);
         ramp.setSize(Size.BIG);
-        Boat snusmumrik_boat = new Boat("Лодка", Size.LITTLE);
-        Boat hemul_boat = new Boat("Лодка", Size.LITTLE);
+        PhysicalObject.Boat snusmumrik_boat = new PhysicalObject.Boat("Лодка", Size.LITTLE);
+        PhysicalObject.Boat hemul_boat = new PhysicalObject.Boat("Лодка", Size.LITTLE);
         Hat hat = new Hat("Шляпа", Size.MIDDLE, "Черная", "Старая");
         hat.setName("Шляпа");
         hat.setCondition("Старая");
@@ -33,15 +33,23 @@ public class Main {
         Scene scene = new Scene("Вращающаяся сцена", Size.BIG);
         Theatre theatre = new Theatre("Театр", Size.BIG);
 
+
     // actions
         crowd.put(cupsOfCoffee);
         crowd.sit(ramp);
         crowd.applaud();
 
         hemul.look(snusmumrik);
-        hemul.move(Speed.SLOWLY, snusmumrik);
+        hemul.move(10, snusmumrik);
 
+        try{
+            scene.rotate(400);
+        }
+        catch (WrongAngleException e){
+            System.out.println(e.getMessage());
+        }
         scene.rotate();
+
         emma.laugh();
         crowd.hear(emma);
         crowd.fall();
@@ -63,11 +71,8 @@ public class Main {
         hemul.sit(hemul_boat);
         hemul.row(hemul_boat);
 
-        env.setWhether(Whether.CALM);
+        env.setWhether(Weather.CALM);
         env.setTime(TimeOfDay.NIGHT);
-
-        snusmumrik.ownAccessory(hat);
-        mumitroll.ownAccessory(pipe);
 
         snusmumrik.row(snusmumrik_boat);
         mumitroll.look(hat);
@@ -77,6 +82,8 @@ public class Main {
 
         snusmumrik.getOut(snusmumrik_boat);
         snusmumrik.laugh();
+        mumitroll.sit(snusmumrik_boat);
+        mumitroll.use(pipe);
 
     }
 }

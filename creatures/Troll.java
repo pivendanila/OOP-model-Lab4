@@ -3,13 +3,15 @@ package creatures;
 
 import java.util.ArrayList;
 import java.util.Objects;
-import objects.Boat;
+
+import exceptions.EmptyStringException;
 import objects.PhysicalObject;
 import objects.SmokingPipe;
+import objects.Theatre;
 
 public class Troll implements Thinkable, Rowable {
     private final String name;
-    ArrayList<PhysicalObject> accessories = new ArrayList<>();
+    private int speed = 0;
 
     public Troll(String name) {
         this.name = name;
@@ -19,11 +21,16 @@ public class Troll implements Thinkable, Rowable {
         return this.name;
     }
 
-    public void think(String phrase) {
-        System.out.println(phrase);
+    public void think(String phrase){
+        if(phrase == ""){
+            throw new EmptyStringException("Мысль не может быть пустой");
+        }
+        else {
+            System.out.println(this.getName() + " подумал: " + phrase);
+        }
     }
 
-    public void row(Boat boat) {
+    public void row(PhysicalObject.Boat boat) {
         System.out.println(this.name + " гребет в " + boat.getName());
         boat.sail();
     }
@@ -34,20 +41,6 @@ public class Troll implements Thinkable, Rowable {
 
     public void look(Troll troll) {
         System.out.println(this.name + " посмотрел на " + troll.name);
-    }
-
-    public void ownAccessory(PhysicalObject object) {
-        this.accessories.add(object);
-    }
-
-    public String[] showAccessories() {
-        String[] list = new String[this.accessories.size()];
-
-        for(int i = 0; i < this.accessories.size(); ++i) {
-            list[i] = ((PhysicalObject)this.accessories.get(i)).toString();
-        }
-
-        return list;
     }
 
     public void use(PhysicalObject object) {
@@ -74,12 +67,20 @@ public class Troll implements Thinkable, Rowable {
         System.out.println(this.getName() + " вылез из " + obj.getName());
     }
 
-    public void move(Speed speed) {
-        System.out.println(this.name + " пошел " + speed.toString());
+    public void move(int speed) {
+        System.out.println(this.name + " пошел со скоростью " + speed);
     }
 
-    public void move(Speed speed, Troll troll) {
-        System.out.println(this.name + " пошел к " + troll.name + " " + speed.toString());
+    public void move(int speed, Troll troll) {
+        class SpeedConverter {
+            int multiply(int speed, int factor) {
+                return speed*factor;
+            }
+        }
+        SpeedConverter converter = new SpeedConverter();
+        this.speed = converter.multiply(speed, 2);
+
+        System.out.println(this.name + " пошел к " + troll.name + " со скорростью " + speed);
     }
 
     public void fall() {
@@ -102,6 +103,9 @@ public class Troll implements Thinkable, Rowable {
     }
     public void swim(PhysicalObject obj){
         System.out.println(this.getName() + " поплыл к " + obj.getName());
+    }
+    public void swim(Theatre th){
+        System.out.println(this.getName() + " поплыл к " + th.getName());
     }
 
     public int hashCode() {

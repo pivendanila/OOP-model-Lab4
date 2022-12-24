@@ -1,7 +1,7 @@
 package creatures;
-import objects.Boat;
+import objects.PhysicalObject;
 
 public interface Rowable {
-    void row(Boat boat);
+    void row(PhysicalObject.Boat boat);
 }
 

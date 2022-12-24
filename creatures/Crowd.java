@@ -1,6 +1,4 @@
 package creatures;
-
-import objects.Boat;
 import objects.PhysicalObject;
 
 public class Crowd extends Troll{
@@ -9,7 +7,7 @@ public class Crowd extends Troll{
         super(name);
     }
     @Override
-    public void row(Boat boat) {
+    public void row(PhysicalObject.Boat boat) {
         System.out.println(this.getName() + " гребут в " + boat.getName());
         boat.sail();
     }
@@ -34,12 +32,12 @@ public class Crowd extends Troll{
         System.out.println(this.getName() + " сели на " + obj.getName());
     }
     @Override
-    public void move(Speed speed) {
-        System.out.println(this.getName() + " пошли " + speed.toString());
+    public void move(int speed) {
+        System.out.println(this.getName() + " пошли " + speed);
     }
     @Override
-    public void move(Speed speed, Troll troll) {
-        System.out.println(this.getName() + " пошли к " + troll.getName() + " " + speed.toString());
+    public void move(int speed, Troll troll) {
+        System.out.println(this.getName() + " пошли к " + troll.getName() + " " + speed);
     }
     @Override
     public void fall() {

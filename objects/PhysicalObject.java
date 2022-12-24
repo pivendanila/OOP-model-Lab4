@@ -47,4 +47,12 @@ public abstract class PhysicalObject {
             return this.name.equals(other.getName()) && this.size.equals(other.getSize());
         }
     }
+    public static class Boat extends PhysicalObject {
+        public Boat(String name, Size size){
+            super(name, size);
+        }
+        public void sail(){
+            System.out.println(this.getName() + " плывет");
+        }
+    }
 }

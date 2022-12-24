@@ -1,12 +1,12 @@
 package surroundings;
 
-public enum Whether{
+public enum Weather {
     CALM ("Штиль"),
     WINDY ("Ветренно"),
     RAINY ("Дождливо"),
     SNOWY ("Снежно");
     private final String whether;
-    Whether(String w){
+    Weather(String w){
         whether = w;
     }
     @Override

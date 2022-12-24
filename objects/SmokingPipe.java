@@ -19,4 +19,11 @@ public class SmokingPipe extends PhysicalObject{
         SmokingPipe other = (SmokingPipe) object;
         return getName().equals(other.getName());
     }
+    public class SmokeRings extends PhysicalObject{
+        String name;
+        private SmokeRings(String name, Size size){
+            super(name, size);
+            System.out.println("Трубка выпустила кольца дыма");
+        }
+    }
 }
